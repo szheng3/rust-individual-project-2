@@ -2,7 +2,7 @@
 
 # Individual Project 2 - Rust micro-server for Text Summarization
 
-This project aims to build a Rust CLI tool that summarizes text, based on the common task of reading and summarizing books among students. The project uses the `rust actix` and `libtorch` to run a pre-trained `hugging-face` model for summarization.
+This project aims to build a Rust micro-server that summarizes text, based on the common task of reading and summarizing books among students. The project uses the `rust actix` and `libtorch` to run a pre-trained `hugging-face` model for summarization.
 
 ## Architectural Diagram
 
