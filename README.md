@@ -84,7 +84,6 @@ The binary could be downloaded from the release pages. [release](https://github.
 
 - [x] Configure Github Codespaces.
 - [x] Initialise Rust project with pretrained model from [hugging-face](https://huggingface.co/transformers/model_doc/bart.html)
-- [x] Add clap command line parsing for arguments (Text)
 - [x] CI/CD with Github Actions
 - [x] Tag and Releases
 - [x] Benchmark
