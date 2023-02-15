@@ -56,8 +56,6 @@ make release
 ```
 make bench
 ```
-*Below is the screenshot for the results*
-![results](./assets/result.png)
 
 
 
