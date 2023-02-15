@@ -1,15 +1,5 @@
 [//]: # ([![Tests]&#40;https://github.com/szheng3/rust-individual-project-1/actions/workflows/tests.yml/badge.svg&#41;]&#40;https://github.com/szheng3/rust-individual-project-1/actions/workflows/tests.yml&#41;)
 
-[![Build binary release](https://github.com/szheng3/rust-individual-project-1/actions/workflows/release.yml/badge.svg)](https://github.com/szheng3/rust-individual-project-1/actions/workflows/release.yml)
-
-[![Clippy](https://github.com/szheng3/rust-individual-project-1/actions/workflows/lint.yml/badge.svg)](https://github.com/szheng3/rust-individual-project-1/actions/workflows/lint.yml)
-
-[![Rustfmt](https://github.com/szheng3/rust-individual-project-1/actions/workflows/rustfmt.yml/badge.svg)](https://github.com/szheng3/rust-individual-project-1/actions/workflows/rustfmt.yml)
-
-[![publish to Dockerhub](https://github.com/szheng3/rust-individual-project-1/actions/workflows/publish.yml/badge.svg)](https://github.com/szheng3/rust-individual-project-1/actions/workflows/publish.yml)
-
-[![Benchmark](https://github.com/szheng3/rust-individual-project-1/actions/workflows/bench.yml/badge.svg)](https://github.com/szheng3/rust-individual-project-1/actions/workflows/bench.yml)
-
 # Individual Project 2 - Rust micro-server for Text Summarization
 
 This project aims to build a Rust CLI tool that summarizes text, based on the common task of reading and summarizing books among students. The project uses the `rust clap` and `libtorch` to run a pre-trained `hugging-face` model for summarization.
