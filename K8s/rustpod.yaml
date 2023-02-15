@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rust-ml
+  namespace: resume-prod
+spec:
+  selector:
+    matchLabels:
+      app: rust-ml
+  replicas: 1
+  template: # template for the pods
+    metadata:
+      labels:
+        app: rust-ml
+    spec:
+      containers:
+        - name: rust-ml
+          imagePullPolicy: Always
+          image: szheng3/sz-rust-ml:latest
+          ports:
+            - containerPort: 8000
+
+#          env:
+#            - name: SPRING_ZIPKIN_BASEURL
+#              value: zipkin.istio-system.svc.cluster.local:9411
+#          readinessProbe:
+#            httpGet:
+#              path: /actuator/health/readiness
+#              port: 8000
+#            initialDelaySeconds: 60
+#            timeoutSeconds: 5
+#          livenessProbe:
+#            httpGet:
+#              path: /actuator/health/liveness
+#              port: 8000
+#            initialDelaySeconds: 130
+#            timeoutSeconds: 10
+#            failureThreshold: 10
+          resources:
+            requests:
+              ephemeral-storage: 10Gi
+              cpu: 1250m
+              memory: 3Gi
+#      imagePullSecrets:
+#        - name: regcred
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: cloud.google.com/gke-spot
+                    operator: In
+                    values:
+                      - "true"
+#      affinity:
+#        podAntiAffinity:
+#          requiredDuringSchedulingIgnoredDuringExecution:
+#            - topologyKey: kubernetes.io/hostname
+#              labelSelector:
+#                matchExpressions:
+#                - key: app
+#                  operator: In
+#                  values:
+#                    - rust-ml
+#          preferredDuringSchedulingIgnoredDuringExecution:
+#            - weight: 1
+#              podAffinityTerm:
+#                topologyKey: kubernetes.io/hostname
+#                labelSelector:
+#                  matchExpressions:
+#                    - key: app
+#                      operator: In
+#                      values:
+#                        - rust-ml
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rust-ml
+  namespace: resume-prod
+spec:
+  # This defines which pods are going to be represented by this Service
+  # The service becomes a network endpoint for either other services
+  # or maybe external users to connect to (eg browser)
+  selector:
+    app: rust-ml
+
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8000
+  type: ClusterIP
