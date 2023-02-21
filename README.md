@@ -72,11 +72,11 @@ Github Actions configured in .github/workflows
 
 * This repo main branch is automatically published to Dockerhub with [CI/CD](https://github.com/szheng3/rust-individual-project-2/actions/workflows/publish.yml), you can pull the image from [here](https://hub.docker.com/repository/docker/szheng3/sz-rust-ml-cli/general)
 ```
-docker pull szheng3/sz-rust-ml-cli:latest
+docker pull szheng3/sz-rust-ml:latest
 ```
 * Run the docker image, you can pass any text as the parameter at the end of the command. See below.
 ```
-docker run szheng3/sz-rust-ml-cli:latest 'The Chinese monarchy collapsed in 1912 with the Xinhai Revolution, when the Republic of China (ROC) replaced the Qing dynasty. In its early years as a republic, the country underwent a period of instability known as the \"Warlord Era\" before mostly reunifying in 1928 under a Nationalist government. A civil war between the nationalist Kuomintang (KMT) and the Chinese Communist Party (CCP) began in 1927. Japan invaded China in 1937, starting the Second Sino-Japanese War and temporarily halting the civil war. The surrender and expulsion of Japanese forces from China in 1945 left a power vacuum in the country, which led to renewed fighting between the CCP and the Kuomintang.'
+docker run -d -p 8000:8000 szheng3/sz-rust-ml:latest
 ```
 
 ## GitHub releases
