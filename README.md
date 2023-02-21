@@ -1,4 +1,9 @@
-[//]: # ([![Tests]&#40;https://github.com/szheng3/rust-individual-project-1/actions/workflows/tests.yml/badge.svg&#41;]&#40;https://github.com/szheng3/rust-individual-project-1/actions/workflows/tests.yml&#41;)
+[![Tests](https://github.com/szheng3/rust-individual-project-2/actions/workflows/tests.yml/badge.svg)](https://github.com/szheng3/rust-individual-project-2/actions/workflows/tests.yml)
+[![Build binary release](https://github.com/szheng3/rust-individual-project-2/actions/workflows/release.yml/badge.svg)](https://github.com/szheng3/rust-individual-project-2/actions/workflows/release.yml)
+[![Clippy](https://github.com/szheng3/rust-individual-project-2/actions/workflows/lint.yml/badge.svg)](https://github.com/szheng3/rust-individual-project-2/actions/workflows/lint.yml)
+[![Rustfmt](https://github.com/szheng3/rust-individual-project-2/actions/workflows/rustfmt.yml/badge.svg)](https://github.com/szheng3/rust-individual-project-2/actions/workflows/rustfmt.yml)
+[![publish to Dockerhub](https://github.com/szheng3/rust-individual-project-2/actions/workflows/publish.yml/badge.svg)](https://github.com/szheng3/rust-individual-project-2/actions/workflows/publish.yml)
+[![Benchmark](https://github.com/szheng3/rust-individual-project-2/actions/workflows/bench.yml/badge.svg)](https://github.com/szheng3/rust-individual-project-2/actions/workflows/bench.yml)
 
 # Individual Project 2 - Rust micro-server for Text Summarization
 
@@ -65,7 +70,7 @@ Github Actions configured in .github/workflows
 
 ## Docker
 
-* This repo main branch is automatically published to Dockerhub with [CI/CD](https://github.com/szheng3/rust-individual-project-1/actions/workflows/publish.yml), you can pull the image from [here](https://hub.docker.com/repository/docker/szheng3/sz-rust-ml-cli/general)
+* This repo main branch is automatically published to Dockerhub with [CI/CD](https://github.com/szheng3/rust-individual-project-2/actions/workflows/publish.yml), you can pull the image from [here](https://hub.docker.com/repository/docker/szheng3/sz-rust-ml-cli/general)
 ```
 docker pull szheng3/sz-rust-ml-cli:latest
 ```
@@ -75,7 +80,7 @@ docker run szheng3/sz-rust-ml-cli:latest 'The Chinese monarchy collapsed in 1912
 ```
 
 ## GitHub releases
-The binary could be downloaded from the release pages. [release](https://github.com/szheng3/rust-individual-project-1/releases)
+The binary could be downloaded from the release pages. [release](https://github.com/szheng3/rust-individual-project-2/releases)
 
 ## Benchmark Results
 ![Benchmark](./assets/report.png)
