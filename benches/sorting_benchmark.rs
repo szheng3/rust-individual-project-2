@@ -1,4 +1,4 @@
-use rust_ml_cli::init_summarization_model;
+use rust_ml_ms::init_summarization_model;
 use criterion::{
     black_box,
     criterion_group,
