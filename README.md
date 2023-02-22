@@ -83,7 +83,7 @@ docker run -d -p 8000:8000 szheng3/sz-rust-ml:latest
 The binary could be downloaded from the release pages. [release](https://github.com/szheng3/rust-individual-project-2/releases)
 
 ## Benchmark Results
-![Benchmark](./assets/report.png)
+![Benchmark](./assets/report1.png)
 
 ## Progress Log
 
