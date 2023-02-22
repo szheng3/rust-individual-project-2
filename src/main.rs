@@ -7,6 +7,7 @@ use serde::Deserialize;
 use std::sync::Once;
 use actix_web::rt::Runtime;
 use actix_files::Files;
+use actix_cors::Cors;
 
 
 use exitfailure::ExitFailure;
@@ -71,7 +72,15 @@ async fn main() -> Result<(), ExitFailure> {
     println!("Server started successfully");
 
     HttpServer::new(move || {
+
+        let cors = Cors::default()
+            .allow_any_origin() // Allow requests from any origin
+            .allowed_methods(vec!["GET", "POST"])
+            .max_age(3600);
+
+
         App::new()
+            .wrap(cors) // Add the CORS middleware to the app
             .service(api_health_handler)
             .service(api_summary_handler)
             .service(Files::new("/", "./dist").index_file("index.html"))

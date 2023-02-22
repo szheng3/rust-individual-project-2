@@ -13,7 +13,8 @@ export default defineConfig({
     }
   },
   build: {
-    outDir:"../dist"
+    outDir:"../dist",
+
     // outDir: fileURLToPath(new URL('./dist', import.meta.url))
   }
 
