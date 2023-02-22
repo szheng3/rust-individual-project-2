@@ -8,6 +8,8 @@ edition = "2021"
 [dependencies]
 actix-cors = "0.6.4"
 actix-web = "4.3.0"
+actix-files = "0.6.2"
+
 chrono = { version = "0.4.23", features = ["serde"] }
 env_logger = "0.10.0"
 exitfailure = "0.5.1"
@@ -15,7 +17,7 @@ rust-bert = { git = "https://github.com/guillaume-be/rust-bert" }
 serde = { version = "1.0.152", features = ["derive"] }
 tch = "0.10.1"
 uuid = { version = "1.2.2", features = ["v4"] }
-clap = {version="4.0.32", features=["derive"]}
+
 [profile.release]
 opt-level = 1
 

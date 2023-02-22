@@ -6,6 +6,7 @@ use serde::Serialize;
 use serde::Deserialize;
 use std::sync::Once;
 use actix_web::rt::Runtime;
+use actix_files::Files;
 
 
 use exitfailure::ExitFailure;
@@ -28,15 +29,6 @@ struct Info {
 
 #[get("/api/health")]
 async fn api_health_handler() -> HttpResponse {
-    let response_json = &GenericResponse {
-        status: "success".to_string(),
-        message: "Health Check".to_string(),
-    };
-    HttpResponse::Ok().json(response_json)
-}
-
-#[get("/")]
-async fn api_health_handler2() -> HttpResponse {
     let response_json = &GenericResponse {
         status: "success".to_string(),
         message: "Health Check".to_string(),
@@ -81,8 +73,8 @@ async fn main() -> Result<(), ExitFailure> {
     HttpServer::new(move || {
         App::new()
             .service(api_health_handler)
-            .service(api_health_handler2)
             .service(api_summary_handler)
+            .service(Files::new("/", "./dist").index_file("index.html"))
 
             .wrap(Logger::default())
     })
