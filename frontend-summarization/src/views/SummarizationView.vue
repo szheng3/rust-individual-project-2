@@ -58,18 +58,22 @@
           <v-col cols="12"
                  sm="6"
           >
-      
+
 
             <v-card v-if="!(showResult )" variant="flat" class="mt-4">
 
               <v-card-text>
-                <ContentLoader viewBox="0 0 400 280">
+                <ContentLoader viewBox="0 0 400 350">
                   <rect x="0" y="13" rx="4" ry="4" width="400" height="9"/>
                   <rect x="0" y="29" rx="4" ry="4" width="100" height="8"/>
                   <rect x="0" y="50" rx="4" ry="4" width="400" height="10"/>
                   <rect x="0" y="65" rx="4" ry="4" width="400" height="10"/>
                   <rect x="0" y="79" rx="4" ry="4" width="100" height="10"/>
-                  <rect x="0" y="99" rx="5" ry="5" width="400" height="200"/>
+                  <rect x="0" y="95" rx="4" ry="4" width="400" height="10"/>
+                  <rect x="0" y="110" rx="4" ry="4" width="400" height="10"/>
+                  <rect x="0" y="125" rx="4" ry="4" width="100" height="10"/>
+                  <rect x="0" y="140" rx="5" ry="5" width="400" height="200"/>
+
                 </ContentLoader>
               </v-card-text>
             </v-card>
