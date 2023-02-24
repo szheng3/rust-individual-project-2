@@ -1,7 +1,8 @@
 mod lib;
 mod tests;
+
 use actix_web::middleware::Logger;
-use actix_web::{get, App, HttpResponse, HttpServer, Responder, web};
+use actix_web::{get, post, App, HttpResponse, HttpServer, Responder, web};
 use serde::Serialize;
 use serde::Deserialize;
 use std::sync::Once;
@@ -12,7 +13,6 @@ use actix_cors::Cors;
 
 use exitfailure::ExitFailure;
 use std::thread;
-
 
 
 #[derive(Serialize)]
@@ -38,9 +38,8 @@ async fn api_health_handler() -> HttpResponse {
 }
 
 
-
-#[get("/api/summary")]
-async fn api_summary_handler(info: web::Query<Info>) -> impl Responder {
+#[post("/api/summary")]
+async fn api_summary_handler(info: web::Json<Info>) -> impl Responder {
     let summarization_model = lib::init_summarization_model();
 
     let mut input = [String::new(); 1];
@@ -56,11 +55,6 @@ async fn api_summary_handler(info: web::Query<Info>) -> impl Responder {
 }
 
 
-
-
-
-
-
 #[actix_web::main]
 async fn main() -> Result<(), ExitFailure> {
     if std::env::var_os("RUST_LOG").is_none() {
@@ -72,10 +66,9 @@ async fn main() -> Result<(), ExitFailure> {
     println!("Server started successfully");
 
     HttpServer::new(move || {
-
         let cors = Cors::default()
             .allow_any_origin() // Allow requests from any origin
-            .allowed_methods(vec!["GET", "POST"])
+            .allowed_methods(vec!["GET", "POST", "OPTIONS"])
             .max_age(3600);
 
 
