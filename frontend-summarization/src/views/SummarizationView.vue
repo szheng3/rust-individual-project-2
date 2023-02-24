@@ -2,11 +2,11 @@
   <v-app>
     <v-app-bar flat>
       <v-container class="fill-height d-flex align-center">
-<!--        <v-avatar-->
-<!--            class="me-10 ms-4"-->
-<!--            color="grey-darken-1"-->
-<!--            size="32"-->
-<!--        ></v-avatar>-->
+        <!--        <v-avatar-->
+        <!--            class="me-10 ms-4"-->
+        <!--            color="grey-darken-1"-->
+        <!--            size="32"-->
+        <!--        ></v-avatar>-->
 
         <v-btn
             v-for="link in links"
@@ -28,13 +28,14 @@
                  sm="6">
             <v-sheet rounded class="mt-4">
 
-              <v-form @submit.prevent="submitForm" class="pa-3">
+              <v-form ref="myForm" @submit.prevent="submitForm" class="pa-3">
 
 
                 <v-textarea
+                    :rules="[requiredRule]"
                     rounded
                     v-model="textInput"
-                    label="Enter text to summarize"
+                    label="Enter text to summarize (English)"
                     rows="23"
                     :loading="loading"></v-textarea>
 
@@ -56,11 +57,13 @@
 
           <v-col cols="12"
                  sm="6">
+            <v-fade-transition>
 
-            <v-card v-if="showResult" variant="flat" class="mt-4">
-              <v-card-title class="headline">{{ result.status }}</v-card-title>
-              <v-card-text>{{ result.message }}</v-card-text>
-            </v-card>
+              <v-card v-if="showResult" variant="flat" class="mt-4">
+                <v-card-title class="headline">Summarization</v-card-title>
+                <v-card-text>{{ result.message }}</v-card-text>
+              </v-card>
+            </v-fade-transition>
           </v-col>
         </v-row>
 
@@ -73,7 +76,7 @@
     >
 
       <div class="text-caption">
-        This project aims to build a Rust CLI tool that summarizes text, based on the common task of reading and
+        This project aims to build a Rust app that summarizes text, based on the common task of reading and
         summarizing books among students.
       </div>
 
@@ -99,23 +102,34 @@ const result = ref({status: 'success', message: 'Sample'});
 const links = ref([
   'Summarization',
 ]);
+const requiredRule = (value) => {
+  if (!value) {
+    return 'This field is required';
+  } else {
+    return true;
+  }
+};
 
 const submitForm = async () => {
-  loading.value = true;
-  try {
+  if (myForm.value.validate()) {
+    // Form is valid, submit it
+    loading.value = true;
+    try {
 
-    const response = await axios.post('/api/summary', {
-      context: textInput.value,
-      minlength: Math.round(sliderValue.value / 100 * textInput.value.split(' ').length)
-    });
-    result.value = await response.data;
-    showResult.value = true;
+      const response = await axios.post('/api/summary', {
+        context: textInput.value,
+        minlength: Math.round(sliderValue.value / 100 * textInput.value.split(' ').length)
+      });
+      result.value = await response.data;
+      showResult.value = true;
 
 
-  } catch (error) {
-    console.error(error);
-  } finally {
-    loading.value = false;
+    } catch (error) {
+      console.error(error);
+    } finally {
+      loading.value = false;
+    }
+
   }
 
 

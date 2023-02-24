@@ -62,6 +62,8 @@ async fn main() -> Result<(), ExitFailure> {
         std::env::set_var("RUST_LOG", "actix_web=info");
     }
     env_logger::init();
+    lib::init_summarization_model(10);
+
 
 
     println!("Server started successfully");
