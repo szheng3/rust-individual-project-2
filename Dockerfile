@@ -3,7 +3,7 @@ FROM node:19-alpine as frontend
 WORKDIR /app
 COPY frontend-summarization/package*.json ./
 RUN npm install
-COPY . .
+COPY frontend-summarization .
 RUN npm run build
 
 
