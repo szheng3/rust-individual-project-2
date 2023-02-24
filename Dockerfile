@@ -1,3 +1,12 @@
+# Frontend build stage
+FROM node:19-alpine as frontend
+WORKDIR /app
+COPY frontend-summarization/package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+
 # Use a Rust base image
 FROM rust:latest
 
@@ -18,6 +27,7 @@ WORKDIR /app
 COPY . .
 #ENV LIBTORCH='/app/libtorch'
 #ENV LD_LIBRARY_PATH='${LIBTORCH}/lib:$LD_LIBRARY_PATH'
+COPY --from=frontend /app/dist/ ./dist/
 
 # Build the application
 RUN cargo build --release
