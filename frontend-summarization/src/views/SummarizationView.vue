@@ -2,7 +2,8 @@
   <v-app>
     <v-container>
       <v-row>
-        <v-col>
+        <v-col cols="12"
+               sm="6">
           <v-form @submit.prevent="submitForm">
 
 
@@ -10,11 +11,12 @@
                 rounded
                 v-model="textInput"
                 label="Enter text to summarize"
-                rows="50"
-                class="rounded"
+                rows="20"
+                class="ma-lg-0"
                 :loading="loading"></v-textarea>
             <div class="text-caption">
-              Longer text will take longer to process. Output words Around: {{ Math.round(sliderValue / 100 * textInput.split(' ').length) }}
+              Longer text will take longer to process. Output words about:
+              <strong>{{ Math.round(sliderValue / 100 * textInput.split(' ').length) }}</strong>
             </div>
             <v-slider v-model="sliderValue" min="0" max="100"
                       :thumb-size="15"
@@ -25,16 +27,34 @@
             <v-btn :loading="loading" type="submit" color="primary">Submit</v-btn>
           </v-form>
         </v-col>
-        <v-col>
-          <v-card v-if="showResult" class="mt-4" variant="tonal">
+        <v-col cols="12"
+               sm="6">
+          <v-card v-if="showResult" variant="tonal">
             <v-card-title class="headline">{{ result.status }}</v-card-title>
             <v-card-text>{{ result.message }}</v-card-text>
           </v-card>
         </v-col>
       </v-row>
+      <v-divider class="mt-10"></v-divider>
+
+      <v-footer
+          class=" text-center d-flex flex-column mt-5"
+      >
+
+        <div class="text-caption">
+          This project aims to build a Rust CLI tool that summarizes text, based on the common task of reading and summarizing books among students.
+        </div>
+
+        <v-divider></v-divider>
+
+        <div class="text-caption">
+          {{ new Date().getFullYear() }} —Shuai Zheng
+        </div>
+      </v-footer>
     </v-container>
   </v-app>
 </template>
+
 
 <script>
 import {ref} from 'vue';
@@ -46,7 +66,7 @@ export default {
     const loading = ref(false);
     const showResult = ref(false);
     const sliderValue = ref(50);
-    const result = ref({status: '', message: ''});
+    const result = ref({status: 'success', message: 'Sample'});
 
     const submitForm = async () => {
       loading.value = true;
