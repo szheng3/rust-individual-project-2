@@ -6,7 +6,9 @@ use exitfailure::ExitFailure;
 use rust_bert::bart::{
     BartConfigResources, BartMergesResources, BartModelResources, BartVocabResources,
 };
+use rust_bert::pipelines::common::ModelType;
 use rust_bert::pipelines::summarization::{SummarizationConfig, SummarizationModel};
+use rust_bert::prophetnet::{ProphetNetConfigResources, ProphetNetModelResources, ProphetNetVocabResources};
 use rust_bert::resources::RemoteResource;
 use serde::Deserialize;
 use serde::Serialize;
@@ -16,30 +18,54 @@ static mut SUMMARIZATION_MODEL: Option<SummarizationModel> = None;
 
 static INIT_MODEL: Once = Once::new();
 
-pub fn init_summarization_model() -> SummarizationModel {
+pub fn init_summarization_model(minlength:i64) -> SummarizationModel {
     let do_steps = move || -> Result<SummarizationModel, ExitFailure> {
+        // let config_resource = Box::new(RemoteResource::from_pretrained(
+        //     BartConfigResources::DISTILBART_CNN_6_6,
+        // ));
+        // let vocab_resource = Box::new(RemoteResource::from_pretrained(
+        //     BartVocabResources::DISTILBART_CNN_6_6,
+        // ));
+        // let merges_resource = Box::new(RemoteResource::from_pretrained(
+        //     BartMergesResources::DISTILBART_CNN_6_6,
+        // ));
+        // let model_resource = Box::new(RemoteResource::from_pretrained(
+        //     BartModelResources::DISTILBART_CNN_6_6,
+        // ));
+        //
+        // let summarization_config = SummarizationConfig {
+        //     model_resource,
+        //     config_resource,
+        //     vocab_resource,
+        //     merges_resource: Some(merges_resource),
+        //     num_beams: 1,
+        //     length_penalty: 1.0,
+        //     min_length: minlength,
+        //     max_length: Some(minlength+30),
+        //     device: Device::Cpu,
+        //     ..Default::default()
+        // };
         let config_resource = Box::new(RemoteResource::from_pretrained(
-            BartConfigResources::DISTILBART_CNN_6_6,
+            ProphetNetConfigResources::PROPHETNET_LARGE_CNN_DM,
         ));
         let vocab_resource = Box::new(RemoteResource::from_pretrained(
-            BartVocabResources::DISTILBART_CNN_6_6,
+            ProphetNetVocabResources::PROPHETNET_LARGE_CNN_DM,
         ));
-        let merges_resource = Box::new(RemoteResource::from_pretrained(
-            BartMergesResources::DISTILBART_CNN_6_6,
-        ));
-        let model_resource = Box::new(RemoteResource::from_pretrained(
-            BartModelResources::DISTILBART_CNN_6_6,
+        let weights_resource = Box::new(RemoteResource::from_pretrained(
+            ProphetNetModelResources::PROPHETNET_LARGE_CNN_DM,
         ));
 
         let summarization_config = SummarizationConfig {
-            model_resource,
+            model_type: ModelType::ProphetNet,
+            model_resource: weights_resource,
             config_resource,
             vocab_resource,
-            merges_resource: Some(merges_resource),
-            num_beams: 1,
-            length_penalty: 1.0,
-            min_length: 56,
-            max_length: Some(142),
+            merges_resource: None,
+            length_penalty: 1.2,
+            num_beams: 4,
+            min_length: minlength,
+            max_length: Some(minlength + 30),
+            no_repeat_ngram_size: 3,
             device: Device::Cpu,
             ..Default::default()
         };

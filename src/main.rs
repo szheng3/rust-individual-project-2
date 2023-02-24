@@ -25,6 +25,7 @@ pub struct GenericResponse {
 #[derive(Deserialize)]
 struct Info {
     context: String,
+    minlength: i64,
 }
 
 
@@ -40,7 +41,7 @@ async fn api_health_handler() -> HttpResponse {
 
 #[post("/api/summary")]
 async fn api_summary_handler(info: web::Json<Info>) -> impl Responder {
-    let summarization_model = lib::init_summarization_model();
+    let summarization_model = lib::init_summarization_model(info.minlength);
 
     let mut input = [String::new(); 1];
     input[0] = info.context.to_owned();
