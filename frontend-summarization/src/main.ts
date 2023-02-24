@@ -1,12 +1,9 @@
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import {createApp} from 'vue'
+import {createPinia} from 'pinia'
 
 import App from './App.vue'
 import router from './router'
-
-// import './assets/main.css'
 import 'vuetify/styles'
-import LottieAnimation from "lottie-web-vue";
 
 
 import {VueQueryPlugin} from "@tanstack/vue-query";
@@ -20,7 +17,6 @@ const vuetify = createVuetify({
     directives,
 })
 
-app.use(LottieAnimation);
 app.use(createPinia())
 app.use(router)
 app.use(VueQueryPlugin)

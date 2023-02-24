@@ -58,29 +58,22 @@
           <v-col cols="12"
                  sm="6"
           >
-            <!--            <lottie-animation-->
-            <!--                class="h-50"-->
-            <!--                align-self="center"-->
-            <!--                :animationData="jsonAnime"-->
-            <!--                auto-play-->
-            <!--                loop-->
-            <!--            />-->
+      
 
-
-            <v-card v-if="!(showResult )" variant="flat" class="mt-4"  >
+            <v-card v-if="!(showResult )" variant="flat" class="mt-4">
 
               <v-card-text>
-                <ContentLoader viewBox="0 0 400 280"  >
-                  <rect x="0" y="13" rx="4" ry="4" width="400" height="9" />
-                  <rect x="0" y="29" rx="4" ry="4" width="100" height="8" />
-                  <rect x="0" y="50" rx="4" ry="4" width="400" height="10" />
-                  <rect x="0" y="65" rx="4" ry="4" width="400" height="10" />
-                  <rect x="0" y="79" rx="4" ry="4" width="100" height="10" />
-                  <rect x="0" y="99" rx="5" ry="5" width="400" height="200" />
+                <ContentLoader viewBox="0 0 400 280">
+                  <rect x="0" y="13" rx="4" ry="4" width="400" height="9"/>
+                  <rect x="0" y="29" rx="4" ry="4" width="100" height="8"/>
+                  <rect x="0" y="50" rx="4" ry="4" width="400" height="10"/>
+                  <rect x="0" y="65" rx="4" ry="4" width="400" height="10"/>
+                  <rect x="0" y="79" rx="4" ry="4" width="100" height="10"/>
+                  <rect x="0" y="99" rx="5" ry="5" width="400" height="200"/>
                 </ContentLoader>
               </v-card-text>
             </v-card>
-            <v-card v-if="showResult " variant="flat" class="mt-4"  >
+            <v-card v-if="showResult " variant="flat" class="mt-4">
               <v-card-title class="headline">Summarization</v-card-title>
               <v-card-text>{{ result.message }}</v-card-text>
             </v-card>
@@ -113,7 +106,6 @@
 <script setup>
 import {ref} from 'vue';
 import axios from "axios";
-import jsonAnime from "@/assets/135693-ai-data.json"
 import {ContentLoader} from 'vue-content-loader'
 
 
