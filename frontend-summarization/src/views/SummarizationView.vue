@@ -98,7 +98,7 @@ const myForm = ref()
 const textInput = ref('');
 const loading = ref(false);
 const showResult = ref(false);
-const sliderValue = ref(50);
+const sliderValue = ref(38);
 const result = ref({status: 'success', message: 'Sample'});
 const links = ref([
   'Summarization',
