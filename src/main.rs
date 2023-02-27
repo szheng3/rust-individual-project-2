@@ -13,6 +13,7 @@ use actix_cors::Cors;
 
 use exitfailure::ExitFailure;
 use std::thread;
+use rust_bert::pipelines::common::ModelType;
 
 
 #[derive(Serialize)]
@@ -41,7 +42,7 @@ async fn api_health_handler() -> HttpResponse {
 
 #[post("/api/summary")]
 async fn api_summary_handler(info: web::Json<Info>) -> impl Responder {
-    let summarization_model = lib::init_summarization_model(info.minlength);
+    let summarization_model = lib::init_summarization_model(ModelType::Bart,info.minlength);
 
     let mut input = [String::new(); 1];
     input[0] = info.context.to_owned();
@@ -62,7 +63,7 @@ async fn main() -> Result<(), ExitFailure> {
         std::env::set_var("RUST_LOG", "actix_web=info");
     }
     env_logger::init();
-    lib::init_summarization_model(10);
+    lib::init_summarization_model(ModelType::Bart,10);
 
 
 

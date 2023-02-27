@@ -5,6 +5,7 @@ use criterion::{
     criterion_main,
     Criterion
 };
+use rust_bert::pipelines::common::ModelType;
 
 // fn sort_arr_benchmark(c: &mut Criterion) {
 //     let mut arr = black_box(
@@ -22,7 +23,7 @@ fn nlp_benchmark(c: &mut Criterion) {
     let mut inputs = black_box(
         ["ss"]
     );
-    let summarization_model = init_summarization_model(100);
+    let summarization_model = init_summarization_model(ModelType::Bart,100);
 
     c.bench_function(
         "nlp algorithm",

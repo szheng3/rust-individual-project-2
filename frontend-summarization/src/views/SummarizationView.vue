@@ -131,8 +131,11 @@ const requiredRule = (value) => {
   if (!value) {
     return 'This field is required';
   } else {
-    if (value.split(' ').length > 16384) {
-      return 'Text length should be less than 16,384 words';
+    // if (value.split(' ').length > 16384) {
+    //   return 'Text length should be less than 16,384 words';
+    // }
+    if (value.split(' ').length > 1000) {
+      return 'Text length should be less than 1,000 words';
     }
     return true;
   }
