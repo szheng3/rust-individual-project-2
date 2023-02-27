@@ -89,6 +89,7 @@
       </v-container>
     </v-main>
     <v-footer
+        absolute
         class=" text-center d-flex flex-column"
         flat
     >
@@ -111,9 +112,10 @@
 import {ref} from 'vue';
 import axios from "axios";
 import {ContentLoader} from 'vue-content-loader'
+import {notify} from "@kyvg/vue3-notification";
 
 
-const myForm = ref()
+const myForm = ref(null)
 
 const textInput = ref('');
 const loading = ref(false);
@@ -124,15 +126,22 @@ const links = ref([
   'Summarization',
 ]);
 const requiredRule = (value) => {
+
+
   if (!value) {
     return 'This field is required';
   } else {
+    if (value.split(' ').length > 16384) {
+      return 'Text length should be less than 16,384 words';
+    }
     return true;
   }
 };
 
+
 const submitForm = async () => {
-  if (myForm.value.validate()) {
+  const isValid = await myForm.value.validate();
+  if (isValid.valid) {
     // Form is valid, submit it
     loading.value = true;
     try {
@@ -146,6 +155,12 @@ const submitForm = async () => {
 
 
     } catch (error) {
+
+      notify({
+        type: "error",
+        text: "Ops! something went wrong! Please Reduce your text length and try again later.",
+      });
+      console.log("error")
       console.error(error);
     } finally {
       loading.value = false;

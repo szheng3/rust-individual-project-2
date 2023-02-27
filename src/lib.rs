@@ -6,10 +6,12 @@ use exitfailure::ExitFailure;
 use rust_bert::bart::{
     BartConfigResources, BartMergesResources, BartModelResources, BartVocabResources,
 };
+use rust_bert::longt5::{LongT5ConfigResources, LongT5ModelResources, LongT5VocabResources};
 use rust_bert::pipelines::common::ModelType;
 use rust_bert::pipelines::summarization::{SummarizationConfig, SummarizationModel};
 use rust_bert::prophetnet::{ProphetNetConfigResources, ProphetNetModelResources, ProphetNetVocabResources};
 use rust_bert::resources::RemoteResource;
+use rust_bert::t5::{T5ConfigResources, T5ModelResources, T5VocabResources};
 use serde::Deserialize;
 use serde::Serialize;
 use tch::Device;
@@ -20,31 +22,59 @@ static INIT_MODEL: Once = Once::new();
 
 pub fn init_summarization_model(minlength:i64) -> SummarizationModel {
     let do_steps = move || -> Result<SummarizationModel, ExitFailure> {
-        let config_resource = Box::new(RemoteResource::from_pretrained(
-            BartConfigResources::DISTILBART_CNN_6_6,
-        ));
-        let vocab_resource = Box::new(RemoteResource::from_pretrained(
-            BartVocabResources::DISTILBART_CNN_6_6,
-        ));
-        let merges_resource = Box::new(RemoteResource::from_pretrained(
-            BartMergesResources::DISTILBART_CNN_6_6,
-        ));
-        let model_resource = Box::new(RemoteResource::from_pretrained(
-            BartModelResources::DISTILBART_CNN_6_6,
-        ));
 
-        let summarization_config = SummarizationConfig {
-            model_resource,
+        let config_resource = RemoteResource::from_pretrained(LongT5ConfigResources::TGLOBAL_BASE_BOOK_SUMMARY);
+        let vocab_resource = RemoteResource::from_pretrained(LongT5VocabResources::TGLOBAL_BASE_BOOK_SUMMARY);
+        let weights_resource = RemoteResource::from_pretrained(LongT5ModelResources::TGLOBAL_BASE_BOOK_SUMMARY);
+
+        let mut summarization_config = SummarizationConfig::new(
+            ModelType::LongT5,
+            weights_resource,
             config_resource,
             vocab_resource,
-            merges_resource: Some(merges_resource),
-            num_beams: 1,
-            length_penalty: 1.0,
-            min_length: minlength,
-            max_length: Some(minlength+30),
-            device: Device::Cpu,
-            ..Default::default()
-        };
+            None,
+        );
+        summarization_config.min_length= minlength;
+        summarization_config.max_length= Option::from(minlength + 30);
+
+        //
+        // let config_resource = RemoteResource::from_pretrained(T5ConfigResources::T5_SMALL);
+        // let vocab_resource = RemoteResource::from_pretrained(T5VocabResources::T5_SMALL);
+        // let weights_resource = RemoteResource::from_pretrained(T5ModelResources::T5_SMALL);
+        //
+        // let summarization_config = SummarizationConfig::new(
+        //     ModelType::T5,
+        //     weights_resource,
+        //     config_resource,
+        //     vocab_resource,
+        //     None,
+        // );
+
+        // let config_resource = Box::new(RemoteResource::from_pretrained(
+        //     BartConfigResources::DISTILBART_CNN_6_6,
+        // ));
+        // let vocab_resource = Box::new(RemoteResource::from_pretrained(
+        //     BartVocabResources::DISTILBART_CNN_6_6,
+        // ));
+        // let merges_resource = Box::new(RemoteResource::from_pretrained(
+        //     BartMergesResources::DISTILBART_CNN_6_6,
+        // ));
+        // let model_resource = Box::new(RemoteResource::from_pretrained(
+        //     BartModelResources::DISTILBART_CNN_6_6,
+        // ));
+        //
+        // let summarization_config = SummarizationConfig {
+        //     model_resource,
+        //     config_resource,
+        //     vocab_resource,
+        //     merges_resource: Some(merges_resource),
+        //     num_beams: 1,
+        //     length_penalty: 1.0,
+        //     min_length: minlength,
+        //     max_length: Some(minlength+30),
+        //     device: Device::Cpu,
+        //     ..Default::default()
+        // };
         // let config_resource = Box::new(RemoteResource::from_pretrained(
         //     ProphetNetConfigResources::PROPHETNET_LARGE_CNN_DM,
         // ));

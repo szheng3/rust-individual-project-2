@@ -14,6 +14,7 @@ import {RouterView} from 'vue-router'</script>
 <!--      </nav>-->
     </div>
   </header>
+  <notifications />
 
   <RouterView />
 </template>

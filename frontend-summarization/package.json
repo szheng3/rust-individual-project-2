@@ -14,6 +14,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@kyvg/vue3-notification": "^2.9.0",
     "@tanstack/vue-query": "^4.24.10",
     "axios": "^1.3.4",
     "pinia": "^2.0.28",
