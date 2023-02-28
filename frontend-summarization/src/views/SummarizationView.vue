@@ -8,6 +8,7 @@
         <!--            size="32"-->
         <!--        ></v-avatar>-->
 
+
         <v-btn
             v-for="link in links"
             :key="link"
@@ -29,14 +30,20 @@
             <v-sheet rounded class="mt-4">
 
               <v-form ref="myForm" @submit.prevent="submitForm" class="pa-3">
+                <v-select
+                    label="Select Models"
+                    @change="changeSelect($event)"
 
+                    v-model="defaultSelected"
+                    :items="models.map((model) => model.name)"
+                ></v-select>
 
                 <v-textarea
                     :rules="[requiredRule]"
                     rounded
                     v-model="textInput"
                     label="Enter text to summarize (English)"
-                    rows="23"
+                    rows="17"
                     :loading="loading"></v-textarea>
 
                 <div class="text-caption">
@@ -109,7 +116,7 @@
 
 
 <script setup>
-import {ref} from 'vue';
+import {computed, ref, watch} from 'vue';
 import axios from "axios";
 import {ContentLoader} from 'vue-content-loader'
 import {notify} from "@kyvg/vue3-notification";
@@ -125,6 +132,23 @@ const result = ref({status: 'success', message: ''});
 const links = ref([
   'Summarization',
 ]);
+const models = ref([{name: "T5", token: 500}, {name: "Bart", token: 1000}]);
+const defaultSelected = ref("T5")
+const selectedToken = computed(() => {
+  return models.value.find((model) => model.name === defaultSelected.value).token
+})
+const changeSelect = async (a) => {
+  if (!!textInput.value) {
+    const isValid = await myForm.value.validate();
+  }
+
+}
+
+watch(defaultSelected, async (newVal, oldVal) => {
+  if (!!textInput.value) {
+    const isValid = await myForm.value.validate();
+  }
+});
 const requiredRule = (value) => {
 
 
@@ -134,8 +158,8 @@ const requiredRule = (value) => {
     // if (value.split(' ').length > 16384) {
     //   return 'Text length should be less than 16,384 words';
     // }
-    if (value.split(' ').length > 1000) {
-      return 'Text length should be less than 1,000 words';
+    if (value.split(' ').length > selectedToken.value) {
+      return `Text length should be less than ${selectedToken.value} words`;
     }
     return true;
   }
@@ -151,7 +175,8 @@ const submitForm = async () => {
 
       const response = await axios.post('/api/summary', {
         context: textInput.value,
-        minlength: Math.round(sliderValue.value / 100 * textInput.value.split(' ').length)
+        minlength: Math.round(sliderValue.value / 100 * textInput.value.split(' ').length),
+        model: defaultSelected.value
       });
       result.value = await response.data;
       showResult.value = true;

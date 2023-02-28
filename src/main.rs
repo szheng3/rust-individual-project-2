@@ -9,6 +9,7 @@ use std::sync::Once;
 use actix_web::rt::Runtime;
 use actix_files::Files;
 use actix_cors::Cors;
+use std::mem::drop;
 
 
 use exitfailure::ExitFailure;
@@ -27,6 +28,7 @@ pub struct GenericResponse {
 struct Info {
     context: String,
     minlength: i64,
+    model: ModelType,
 }
 
 
@@ -42,7 +44,7 @@ async fn api_health_handler() -> HttpResponse {
 
 #[post("/api/summary")]
 async fn api_summary_handler(info: web::Json<Info>) -> impl Responder {
-    let summarization_model = lib::init_summarization_model(ModelType::Bart,info.minlength);
+    let summarization_model = lib::init_summarization_model(info.model, info.minlength);
 
     let mut input = [String::new(); 1];
     input[0] = info.context.to_owned();
@@ -53,6 +55,8 @@ async fn api_summary_handler(info: web::Json<Info>) -> impl Responder {
         status: "success".to_string(),
         message: result.to_string(),
     };
+    drop(summarization_model);
+
     HttpResponse::Ok().json(response_json)
 }
 
@@ -63,8 +67,10 @@ async fn main() -> Result<(), ExitFailure> {
         std::env::set_var("RUST_LOG", "actix_web=info");
     }
     env_logger::init();
-    lib::init_summarization_model(ModelType::Bart,10);
-
+    let bart = lib::init_summarization_model(ModelType::Bart, 10);
+    drop(bart);
+    let t5 = lib::init_summarization_model(ModelType::T5, 10);
+    drop(t5);
 
 
     println!("Server started successfully");
