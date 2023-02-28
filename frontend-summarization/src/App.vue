@@ -14,7 +14,7 @@ import {RouterView} from 'vue-router'</script>
 <!--      </nav>-->
     </div>
   </header>
-  <notifications />
+  <notifications class="mt-10 mr-16"/>
 
   <RouterView />
 </template>

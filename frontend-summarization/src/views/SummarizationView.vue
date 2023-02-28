@@ -33,7 +33,6 @@
                 <v-select
                     label="Select Models"
                     @change="changeSelect($event)"
-
                     v-model="defaultSelected"
                     :items="models.map((model) => model.name)"
                 ></v-select>
@@ -133,7 +132,7 @@ const links = ref([
   'Summarization',
 ]);
 const models = ref([{name: "T5", token: 500}, {name: "Bart", token: 1000}]);
-const defaultSelected = ref("T5")
+const defaultSelected = ref("Bart")
 const selectedToken = computed(() => {
   return models.value.find((model) => model.name === defaultSelected.value).token
 })
@@ -186,10 +185,8 @@ const submitForm = async () => {
 
       notify({
         type: "error",
-        text: "Ops! something went wrong! Please Reduce your text length and try again later.",
+        text: "Ops! something went wrong! Please reduce your text length and try again later.",
       });
-      console.log("error")
-      console.error(error);
     } finally {
       loading.value = false;
     }
