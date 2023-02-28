@@ -55,7 +55,6 @@ async fn api_summary_handler(info: web::Json<Info>) -> impl Responder {
         status: "success".to_string(),
         message: result.to_string(),
     };
-    drop(summarization_model);
 
     HttpResponse::Ok().json(response_json)
 }
