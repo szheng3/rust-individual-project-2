@@ -11,6 +11,7 @@ This project aims to build a Rust micro-server that summarizes text, based on th
 
 ## Architectural Diagram
 
+![image](./assets/ml.png)
 
 ## Project Goals/Outcomes
 
