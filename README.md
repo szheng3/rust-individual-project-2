@@ -19,7 +19,7 @@ This project aims to build a Rust micro-server that summarizes text, based on th
 
 ![image](./assets/ml.png)
 ## Demo
-* [website](https://apiv2.sszzz.me)
+* [https://apiv2.sszzz.me](https://apiv2.sszzz.me)
   ![image](./assets/demo1.png)
 
 
