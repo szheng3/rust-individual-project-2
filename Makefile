@@ -44,4 +44,9 @@ benchx86:
 releasex86:
 	cargo build --release
 
+frontend:
+	cd frontend-summarization && yarn install && yarn build && cp -R ./dist ../
+
+
+
 all: format lint test run

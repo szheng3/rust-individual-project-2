@@ -45,13 +45,17 @@ kubectl apply -f .
 
 1. Install rust via [rustup](https://rustup.rs/)
 2. Install the libtorch (for Mac M1), Intel chips users can skip this step
+3. node 
 ```
 brew install pytorch@1.13.1
 ```
 
 
 ## Not Mac ARM chips users
-
+* Build frontend
+```
+make frontend 
+```
 * Run, you can pass any text as the parameter at the end of the command. See below.
 ```
 make run 
@@ -68,6 +72,10 @@ make benchx86
 ```
 
 ## Mac ARM chips users
+* Build frontend
+```
+make frontend 
+```
 * change the path in the Makefile to your libtorch path
 ```
 export LIBTORCH=/opt/homebrew/Cellar/pytorch/1.13.1 &&export LD_LIBRARY_PATH=${LIBTORCH}/lib:$LD_LIBRARY_PATH
