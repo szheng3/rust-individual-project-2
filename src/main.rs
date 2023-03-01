@@ -82,7 +82,7 @@ async fn main() -> Result<(), ExitFailure> {
 
 
         App::new()
-            .wrap(cors) // Add the CORS middleware to the app
+            // .wrap(cors) // Add the CORS middleware to the app
             .service(api_health_handler)
             .service(api_summary_handler)
             .service(Files::new("/", "./dist").index_file("index.html"))
