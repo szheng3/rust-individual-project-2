@@ -114,6 +114,7 @@ The binary could be downloaded from the release pages. [release](https://github.
 - [x] CI/CD with Github Actions
 - [x] Tag and Releases
 - [x] Benchmark
+- [x] kubernetes deployment
 
 ## References
 
