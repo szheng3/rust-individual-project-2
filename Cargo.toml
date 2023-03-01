@@ -17,6 +17,7 @@ rust-bert = { git = "https://github.com/guillaume-be/rust-bert" }
 serde = { version = "1.0.152", features = ["derive"] }
 tch = "0.10.1"
 uuid = { version = "1.2.2", features = ["v4"] }
+log = "0.4.17"
 
 [profile.release]
 opt-level = 1
