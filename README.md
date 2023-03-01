@@ -13,6 +13,7 @@ This project aims to build a Rust micro-server that summarizes text, based on th
 
 ![image](./assets/ml.png)
 
+
 ## Project Goals/Outcomes
 
 * Develop my Rust micro-service 
