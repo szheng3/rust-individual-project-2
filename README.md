@@ -107,6 +107,8 @@ The binary could be downloaded from the release pages. [release](https://github.
 
 ## Benchmark Results
 ![Benchmark](./assets/report1.png)
+## logging
+![logging](./assets/logging.png)
 
 ## Progress Log
 
@@ -116,6 +118,7 @@ The binary could be downloaded from the release pages. [release](https://github.
 - [x] Tag and Releases
 - [x] Benchmark
 - [x] kubernetes deployment
+- [x] logging
 
 ## References
 
