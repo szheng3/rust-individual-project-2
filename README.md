@@ -9,6 +9,12 @@
 
 This project aims to build a Rust micro-server that summarizes text, based on the common task of reading and summarizing books among students. The project uses the `rust actix` and `libtorch` to run a pre-trained `hugging-face` model for summarization.
 
+## Project Goals/Outcomes
+
+* Develop my Rust micro-service with kubernetes
+* Use Github Codespaces and Copilot
+* Integrate libtorch and 'hugging-face pretrained models' into a Rust web project
+
 ## Architectural Diagram
 
 ![image](./assets/ml.png)
@@ -34,11 +40,6 @@ kubectl apply -f .
 ```
 ![image](./assets/k8s1.png)
 
-## Project Goals/Outcomes
-
-* Develop my Rust micro-service 
-* Use Github Codespaces and Copilot
-* Integrate libtorch and 'hugging-face pretrained models' into a Rust Cli project
 
 ## Setup
 
