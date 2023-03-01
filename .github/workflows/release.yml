@@ -15,7 +15,7 @@ jobs:
           components: clippy, rustfmt
           override: true
       - name: Run clippy
-        run: make releasex86 && zip --junk-paths -r release.zip target/release
+        run: make releasex86 && zip  -r release.zip target/release/*
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
