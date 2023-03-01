@@ -56,7 +56,7 @@ brew install pytorch@1.13.1
 ```
 make frontend 
 ```
-* Run, you can pass any text as the parameter at the end of the command. See below.
+* Run, you can run the rust web app.
 ```
 make run 
 ```
@@ -80,7 +80,7 @@ make frontend
 ```
 export LIBTORCH=/opt/homebrew/Cellar/pytorch/1.13.1 &&export LD_LIBRARY_PATH=${LIBTORCH}/lib:$LD_LIBRARY_PATH
 ```
-* Run, you can pass any text as the parameter at the end of the command. See below.
+* Run, you can run the rust web app.
 ```
 make runarm 
 ```
