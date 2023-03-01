@@ -12,7 +12,27 @@ This project aims to build a Rust micro-server that summarizes text, based on th
 ## Architectural Diagram
 
 ![image](./assets/ml.png)
+## Demo
+* [website](https://apiv2.sszzz.me)
+  ![image](./assets/demo1.png)
 
+
+## Kubernetes Deployment
+* go to the directory `K8s`
+```
+cd K8s
+```
+
+* create the namespace `resume-prod`
+```
+kubectl create namespace resume-prod
+
+```
+* apply the yaml files
+```
+kubectl apply -f .
+```
+![image](./assets/k8s1.png)
 
 ## Project Goals/Outcomes
 
