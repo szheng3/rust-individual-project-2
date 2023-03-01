@@ -10,7 +10,8 @@ use actix_web::rt::Runtime;
 use actix_files::Files;
 use actix_cors::Cors;
 use std::mem::drop;
-
+extern crate log;
+use log::{debug, error, log_enabled, info, Level};
 
 use exitfailure::ExitFailure;
 use std::thread;
@@ -45,6 +46,8 @@ async fn api_health_handler() -> HttpResponse {
 #[post("/api/summary")]
 async fn api_summary_handler(info: web::Json<Info>) -> impl Responder {
     let summarization_model = lib::init_summarization_model(info.model, info.minlength);
+    info!("init model success");
+
 
     let mut input = [String::new(); 1];
     input[0] = info.context.to_owned();
@@ -56,6 +59,8 @@ async fn api_summary_handler(info: web::Json<Info>) -> impl Responder {
         message: result.to_string(),
     };
 
+    info!("Response message: {}", response_json.message);
+
     HttpResponse::Ok().json(response_json)
 }
 
@@ -65,15 +70,15 @@ async fn main() -> Result<(), ExitFailure> {
     if std::env::var_os("RUST_LOG").is_none() {
         std::env::set_var("RUST_LOG", "actix_web=info");
     }
-    env_logger::init();
+    env_logger::builder()
+        .filter_level(log::LevelFilter::Info)
+        .init();
     let bart = lib::init_summarization_model(ModelType::Bart, 10);
     drop(bart);
     let t5 = lib::init_summarization_model(ModelType::T5, 10);
     drop(t5);
 
-
-    println!("Server started successfully");
-
+    log::info!("Server started successfully");
     HttpServer::new(move || {
         let cors = Cors::default()
             .allow_any_origin() // Allow requests from any origin
