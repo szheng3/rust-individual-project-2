@@ -107,7 +107,7 @@ The binary could be downloaded from the release pages. [release](https://github.
 
 ## Benchmark Results
 ![Benchmark](./assets/report1.png)
-## logging
+## Logging
 ![logging](./assets/logging.png)
 
 ## Progress Log
