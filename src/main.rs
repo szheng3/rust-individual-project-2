@@ -73,11 +73,6 @@ async fn main() -> Result<(), ExitFailure> {
     env_logger::builder()
         .filter_level(log::LevelFilter::Info)
         .init();
-    let bart = lib::init_summarization_model(ModelType::Bart, 10);
-    drop(bart);
-    let t5 = lib::init_summarization_model(ModelType::T5, 10);
-    drop(t5);
-
     log::info!("Server started successfully");
     HttpServer::new(move || {
         let cors = Cors::default()

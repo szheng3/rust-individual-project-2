@@ -29,6 +29,8 @@ COPY . .
 #ENV LD_LIBRARY_PATH='${LIBTORCH}/lib:$LD_LIBRARY_PATH'
 COPY --from=frontend /app/dist/ ./dist/
 
+RUN make test
+
 # Build the application
 RUN cargo build --release
 
