@@ -41,7 +41,18 @@ kubectl apply -f .
 ![image](./assets/k8s1.png)
 
 
-## Setup
+## Docker(Recommended)
+
+* This repo main branch is automatically published to Dockerhub with [CI/CD](https://github.com/szheng3/rust-individual-project-2/actions/workflows/publish.yml), you can pull the image from [here](https://hub.docker.com/repository/docker/szheng3/sz-rust-ml/general)
+```
+docker pull szheng3/sz-rust-ml:latest
+```
+* Run the docker image, you can pass any text as the parameter at the end of the command. See below.
+```
+docker run -d -p 8000:8000 szheng3/sz-rust-ml:latest
+```
+
+## Setup Manually
 
 1. Install rust via [rustup](https://rustup.rs/)
 2. Install the libtorch (for Mac M1), Intel chips users can skip this step
@@ -99,16 +110,7 @@ make bench
 
 Github Actions configured in .github/workflows
 
-## Docker
 
-* This repo main branch is automatically published to Dockerhub with [CI/CD](https://github.com/szheng3/rust-individual-project-2/actions/workflows/publish.yml), you can pull the image from [here](https://hub.docker.com/repository/docker/szheng3/sz-rust-ml/general)
-```
-docker pull szheng3/sz-rust-ml:latest
-```
-* Run the docker image, you can pass any text as the parameter at the end of the command. See below.
-```
-docker run -d -p 8000:8000 szheng3/sz-rust-ml:latest
-```
 
 ## GitHub releases
 The binary could be downloaded from the release pages. [release](https://github.com/szheng3/rust-individual-project-2/releases)
