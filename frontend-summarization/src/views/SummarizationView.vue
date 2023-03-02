@@ -107,7 +107,7 @@
 
 
       <div class="text-caption">
-        {{ new Date().getFullYear() }} —Shuai Zheng
+        {{ new Date().getFullYear() }} —<a href="https://sszzz.me">Shuai Zheng</a>
       </div>
     </v-footer>
   </v-app>
