@@ -47,7 +47,7 @@ kubectl apply -f .
 ```
 docker pull szheng3/sz-rust-ml:latest
 ```
-* Run the docker image, you can pass any text as the parameter at the end of the command. See below.
+* Run the docker image.
 ```
 docker run -d -p 8000:8000 szheng3/sz-rust-ml:latest
 ```
