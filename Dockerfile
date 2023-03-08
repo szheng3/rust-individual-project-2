@@ -12,15 +12,15 @@ FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
 
 # Update the package repository and install dependencies
 # Get Ubuntu packages
-#RUN apt-get install -y \
-#    build-essential \
-#    curl
+
 
 # Update new packages
 RUN apt-get update
 
-RUN apt-get install -y curl
-
+RUN apt-get install -y \
+    build-essential \
+    curl \
+    pkg-config
 
 # Get Rust
 RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
