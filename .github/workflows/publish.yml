@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - gpu
 
 env:
   DOCKER_REGISTRY: docker.io
