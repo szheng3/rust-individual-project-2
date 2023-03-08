@@ -8,11 +8,22 @@ RUN npm run build
 
 
 # Use a Rust base image
-FROM rust:latest
+FROM nvidia/cuda:11.0.3-runtime-ubuntu20.04
 
 # Update the package repository and install dependencies
-RUN apt-get update && \
-    apt-get install -y software-properties-common python3-dev python3-pip libopenblas-dev libopenmpi-dev
+# Get Ubuntu packages
+RUN apt-get install -y \
+    build-essential \
+    curl
+
+# Update new packages
+RUN apt-get update
+
+# Get Rust
+RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
+
+ENV PATH="/root/.cargo/bin:${PATH}"
+
 
 ## Add the PyTorch repository
 #RUN add-apt-repository ppa:ubuntu-toolchain-r/test
