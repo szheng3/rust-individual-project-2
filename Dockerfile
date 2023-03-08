@@ -33,6 +33,7 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 
 # Add .cargo/bin to PATH
 ENV PATH="/root/.cargo/bin:${PATH}"
+ENV TORCH_CUDA_VERSION="cu117"
 
 # Check cargo is visible
 RUN cargo --help
