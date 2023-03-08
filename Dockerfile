@@ -1,10 +1,10 @@
 # Frontend build stage
-#FROM node:19-alpine as frontend
-#WORKDIR /app
-#COPY frontend-summarization/package*.json ./
-#RUN npm install
-#COPY frontend-summarization .
-#RUN npm run build
+FROM node:19-alpine as frontend
+WORKDIR /app
+COPY frontend-summarization/package*.json ./
+RUN npm install
+COPY frontend-summarization .
+RUN npm run build
 
 
 # Use a Rust base image
@@ -38,8 +38,8 @@ WORKDIR /app
 COPY . .
 #ENV LIBTORCH='/app/libtorch'
 #ENV LD_LIBRARY_PATH='${LIBTORCH}/lib:$LD_LIBRARY_PATH'
-#COPY --from=frontend /app/dist/ ./dist/
-COPY  /app/dist/ ./dist/
+COPY --from=frontend /app/dist/ ./dist/
+#COPY  /app/dist/ ./dist/
 
 RUN make test
 
