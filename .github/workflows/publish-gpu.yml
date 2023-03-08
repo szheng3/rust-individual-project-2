@@ -24,11 +24,12 @@ jobs:
           username: ${{ secrets.DOCKER_REGISTR_USERNAME }}
           password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
 
-      - name: Build Docker Image
+      - name: Build Docker Image gpu
         uses: docker/build-push-action@v2
         with:
           context: .
+          file: ./Dockerfile.gpu
           push: true
-          tags: ${{ secrets.DOCKER_REGISTR_USERNAME }}/$DOCKER_IMAGE_NAME:latest,${{ secrets.DOCKER_REGISTR_USERNAME }}/$DOCKER_IMAGE_NAME:${{ github.sha }}
+          tags: ${{ secrets.DOCKER_REGISTR_USERNAME }}/sz-rust-ml:latest-gpu,${{ secrets.DOCKER_REGISTR_USERNAME }}/sz-rust-ml:${{ github.sha }}
           username: ${{ secrets.DOCKER_REGISTR_USERNAME }}
           password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
