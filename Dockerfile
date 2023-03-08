@@ -8,7 +8,7 @@ RUN npm run build
 
 
 # Use a Rust base image
-FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
+FROM nvidia/cuda:11.0.3-runtime-ubuntu20.04
 
 # Update the package repository and install dependencies
 # Get Ubuntu packages
