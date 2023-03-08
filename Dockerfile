@@ -15,7 +15,12 @@ FROM nvidia/cuda:11.0.3-runtime-ubuntu20.04
 
 
 # Update new packages
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+
+
 RUN apt-get update
+RUN apt-get install -y -q
+
 RUN apt-get install dialog apt-utils -y
 RUN apt-get install -y \
     build-essential \
