@@ -23,9 +23,13 @@ RUN apt-get install -y \
     pkg-config
 
 # Get Rust
-RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 
+# Add .cargo/bin to PATH
 ENV PATH="/root/.cargo/bin:${PATH}"
+
+# Check cargo is visible
+RUN cargo --help
 
 
 ## Add the PyTorch repository
