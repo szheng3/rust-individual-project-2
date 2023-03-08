@@ -54,7 +54,7 @@ COPY . .
 COPY --from=frontend /app/dist/ ./dist/
 #COPY  /app/dist/ ./dist/
 
-#RUN make test
+RUN make test
 
 # Build the application
 RUN cargo build --release
