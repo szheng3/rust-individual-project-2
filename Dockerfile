@@ -16,9 +16,11 @@ FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
 #    build-essential \
 #    curl
 
-RUN apt-get install -y curl
 # Update new packages
 RUN apt-get update
+
+RUN apt-get install -y curl
+
 
 # Get Rust
 RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
