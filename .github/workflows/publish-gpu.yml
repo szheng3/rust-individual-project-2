@@ -30,6 +30,6 @@ jobs:
           context: .
           file: ./Dockerfile.gpu
           push: true
-          tags: ${{ secrets.DOCKER_REGISTR_USERNAME }}/sz-rust-ml:latest-gpu,${{ secrets.DOCKER_REGISTR_USERNAME }}/sz-rust-ml:${{ github.sha }}
+          tags: ${{ secrets.DOCKER_REGISTR_USERNAME }}/${{env.DOCKER_IMAGE_NAME}}:latest-gpu,${{ secrets.DOCKER_REGISTR_USERNAME }}/${{env.DOCKER_IMAGE_NAME}}:${{ github.sha }}
           username: ${{ secrets.DOCKER_REGISTR_USERNAME }}
           password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
