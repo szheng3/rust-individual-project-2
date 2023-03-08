@@ -12,9 +12,9 @@ FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
 
 # Update the package repository and install dependencies
 # Get Ubuntu packages
-RUN apt-get install -y \
-    build-essential \
-    curl
+#RUN apt-get install -y \
+#    build-essential \
+#    curl
 
 # Update new packages
 RUN apt-get update
