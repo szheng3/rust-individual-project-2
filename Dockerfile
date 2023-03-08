@@ -16,6 +16,7 @@ FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
 #    build-essential \
 #    curl
 
+RUN apt-get install -y curl
 # Update new packages
 RUN apt-get update
 
