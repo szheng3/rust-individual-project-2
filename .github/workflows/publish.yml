@@ -29,6 +29,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_REGISTR_USERNAME }}/${{env.DOCKER_IMAGE_NAME:latest}},${{ secrets.DOCKER_REGISTR_USERNAME }}/${{env.DOCKER_IMAGE_NAME:latest}}:${{ github.sha }}
+          tags: ${{ secrets.DOCKER_REGISTR_USERNAME }}/${{env.DOCKER_IMAGE_NAME}}:latest,${{ secrets.DOCKER_REGISTR_USERNAME }}/${{env.DOCKER_IMAGE_NAME}}:latest:${{ github.sha }}
           username: ${{ secrets.DOCKER_REGISTR_USERNAME }}
           password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
