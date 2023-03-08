@@ -75,7 +75,7 @@ pub fn init_summarization_model(model_type: ModelType, minlength: i64) -> Summar
                     length_penalty: 1.0,
                     min_length: minlength,
                     max_length: Some(minlength + 30),
-                    device: Device::Cpu,
+                    device: Device::cuda_if_available(),
                     ..Default::default()
                 };
                 summarization_config
@@ -102,7 +102,7 @@ pub fn init_summarization_model(model_type: ModelType, minlength: i64) -> Summar
                     min_length: minlength,
                     max_length: Some(minlength + 30),
                     no_repeat_ngram_size: 3,
-                    device: Device::Cpu,
+                    device: Device::cuda_if_available(),
                     ..Default::default()
                 };
                 summarization_config
