@@ -10,7 +10,9 @@ use actix_web::rt::Runtime;
 use actix_files::Files;
 use actix_cors::Cors;
 use std::mem::drop;
+
 extern crate log;
+
 use log::{debug, error, log_enabled, info, Level};
 
 use exitfailure::ExitFailure;
@@ -48,6 +50,12 @@ async fn api_health_handler() -> HttpResponse {
 async fn api_summary_handler(info: web::Json<Info>) -> impl Responder {
     let summarization_model = lib::init_summarization_model(info.model, info.minlength);
     info!("init model success");
+    let this_device = Device::cuda_if_available();
+    match this_device {
+        Device::Cuda(_) => info!("Using GPU"),
+        Device::Cpu => info!("Using CPU"),
+        _ => {}
+    }
 
 
     let mut input = [String::new(); 1];
