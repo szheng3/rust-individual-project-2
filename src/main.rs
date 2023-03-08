@@ -16,6 +16,7 @@ use log::{debug, error, log_enabled, info, Level};
 use exitfailure::ExitFailure;
 use std::thread;
 use rust_bert::pipelines::common::ModelType;
+use tch::Device;
 
 
 #[derive(Serialize)]
@@ -47,6 +48,7 @@ async fn api_health_handler() -> HttpResponse {
 async fn api_summary_handler(info: web::Json<Info>) -> impl Responder {
     let summarization_model = lib::init_summarization_model(info.model, info.minlength);
     info!("init model success");
+    info!("is cuda: {}",Device::is_cuda());
 
 
     let mut input = [String::new(); 1];

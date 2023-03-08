@@ -13,6 +13,8 @@ spec:
       labels:
         app: rust-ml
     spec:
+      nodeSelector:
+        cloud.google.com/gke-accelerator: nvidia-tesla-t4
       containers:
         - name: rust-ml
           imagePullPolicy: Always
@@ -37,6 +39,8 @@ spec:
 #            timeoutSeconds: 10
 #            failureThreshold: 10
           resources:
+            limits:
+              nvidia.com/gpu: "1"
             requests:
               ephemeral-storage: 10Gi
               cpu: 1250m
